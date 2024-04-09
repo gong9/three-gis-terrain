@@ -59,7 +59,7 @@ const planProvider = new PlaneProvider();
 planProvider.coordType = UTM;
 
 const martiniProvider = new MartiniTerrainProvider();
-martiniProvider.source = 'http://tile.writter.com.cn/tiles/[z]/[x]/[y]/terrain.webp';
+martiniProvider.source = 'https://tile.writter.com.cn/tiles/[z]/[x]/[y]/terrain.webp';
 martiniProvider.coordType = UTM;
 martiniProvider.useWorker = true;
 
