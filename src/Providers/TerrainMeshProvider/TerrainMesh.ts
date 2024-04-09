@@ -1,11 +1,12 @@
-import { BufferGeometry, Mesh, Vector3 } from 'three';
+import type { BufferGeometry } from 'three'
+import { Mesh, Vector3 } from 'three'
 
 class TerrainMesh extends Mesh {
-    center = new Vector3();
+  center = new Vector3()
 
-    constructor(geometry?: BufferGeometry) {
-        super(geometry);
-    }
+  constructor(geometry?: BufferGeometry) {
+    super(geometry)
+  }
 }
 
-export { TerrainMesh };
+export { TerrainMesh }

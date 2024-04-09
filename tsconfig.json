@@ -15,7 +15,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "strictPropertyInitialization": false,
+    "strictPropertyInitialization": false
   },
   "include": ["vite-env.d.ts", "src/index.ts"],
   "typedocOptions": {
