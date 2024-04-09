@@ -1,6 +1,5 @@
 import { AmbientLight, AxesHelper, DirectionalLight, DirectionalLightHelper, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three'
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls'
-import Stats from 'three/examples/jsm/libs/stats.module'
 import { Map, MapProvider, MartiniTerrainProvider, PlaneProvider, TerrainMeshProvider, UTM } from '../src/index'
 
 const scene = new Scene()
@@ -13,11 +12,14 @@ document.body.appendChild(renderer.domElement)
 
 const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1e7 * 10)
 camera.up = new Vector3(0, 0, 1)
-// camera.position.set(92635, -1255615, 1255615);
-// camera.lookAt(0, 0, 0);
 
-camera.position.set(199968.43461198933, 2479805.6248926367, 1825.955617993283)
-camera.lookAt(204951.28184243775, 2480346.714316563, -5.419012486480361e-14)
+// console.log(lonLatToUtm(39.9087, 116.3975))
+
+// { x: 450337.65155305807, y: 4418874.40831661, z: 1345.1921813928932 }
+// [545075.6602025257, 2946958.9453822337]
+
+camera.position.set(600337.65155305807, 4418874.40831661, 1345.1921813928932)
+camera.lookAt(550337.65155305807, 4418874.40831661, 13.1921813928932)
 
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight)
@@ -41,11 +43,8 @@ const axesHelper = new AxesHelper(1e6)
 scene.add(axesHelper)
 
 const controls = new MapControls(camera, renderer.domElement)
-controls.position0.set(199968.43461198933, 2479805.6248926367, 1825.955617993283)
-controls.target.set(204951.28184243775, 2480346.714316563, -5.419012486480361e-14)
-
-const stats = new (Stats as any)()
-document.body.appendChild(stats.dom)
+// { x: 450337.65155305807, y: 4418874.40831661, z: 13.1921813928932 }
+controls.target.set(550337.65155305807, 4418874.40831661, 13.1921813928932)
 
 // ====== shader test ======
 
@@ -58,12 +57,13 @@ const planProvider = new PlaneProvider()
 planProvider.coordType = UTM
 
 const martiniProvider = new MartiniTerrainProvider()
-martiniProvider.source = 'https://tile.writter.com.cn/tiles/[z]/[x]/[y]/terrain.webp'
+martiniProvider.source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=ISjP5ZD1yxlWIX2zMEyK'
 martiniProvider.coordType = UTM
 martiniProvider.useWorker = true
 
 const mapProvider = new MapProvider()
 mapProvider.source = 'https://webst01.is.autonavi.com/appmaptile?style=6&x=[x]&y=[y]&z=[z]'
+// mapProvider.source = 'http://wprd04.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x=[x]&y=[y]&z=[z]'
 mapProvider.showTileNo = false
 mapProvider.useWorker = true
 
@@ -80,10 +80,10 @@ map.maxZoom = 20
 map.camera = camera
 scene.add(map)
 
-console.log(map)
-
 function animate() {
   requestAnimationFrame(animate)
+
+  // console.log(camera.lookAt)
 
   controls.update()
   map.update()
@@ -92,12 +92,10 @@ function animate() {
   camera.far = far + 5000
   camera.updateProjectionMatrix()
 
-  const visibleTileCount = map.children.filter(x => x.visible).length
-  document.querySelector('#count')!.innerHTML = `${visibleTileCount}`
+  // const visibleTileCount = map.children.filter(x => x.visible).length
+  // document.querySelector('#count')!.innerHTML = `${visibleTileCount}`
 
   renderer.render(scene, camera)
-
-  stats.update()
 }
 
 animate()

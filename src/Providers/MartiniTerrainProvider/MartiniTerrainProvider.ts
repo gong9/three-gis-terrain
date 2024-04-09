@@ -12,7 +12,7 @@ class MartiniTerrainProvider implements Provider<BufferGeometry> {
   private _worker?: any
   private _useWorker = true
 
-  source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=L55MtSxL94Yb4hQeWewp'
+  source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=ISjP5ZD1yxlWIX2zMEyK'
 
   set useWorker(use: boolean) {
     this._useWorker = use

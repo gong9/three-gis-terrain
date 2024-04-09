@@ -18,8 +18,8 @@ const falseEasting = 500e3
 const falseNorthing = 10000e3
 // from https://github.com/chrisveness/geodesy/blob/761587cd748bd9f7c9825195eba4a9fc5891b859/utm.js#L272
 export function lonLatToUtm(lon: number, lat: number, zoneOverride?: number) {
-  if (!(lat >= -80 && lat <= 84))
-    throw new RangeError(`latitude ‘${lat}’ outside UTM limits`)
+  // if (!(lat >= -80 && lat <= 84))
+  //   throw new RangeError(`latitude ‘${lat}’ outside UTM limits`)
 
   let zone = zoneOverride || Math.floor((lon + 180) / 6) + 1 // longitudinal zone
   let λ0 = toRadians((zone - 1) * 6 - 180 + 3) // longitude of central meridian
