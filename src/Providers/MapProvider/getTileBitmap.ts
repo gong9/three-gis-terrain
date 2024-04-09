@@ -29,6 +29,6 @@ export async function getTileBitmap(tileNo: number[], fetch: Fetch, debug = fals
   ctx.fillText(`${tileNo[1]}`, 10, 55)
   ctx.fillStyle = '#66AAFF'
   ctx.fillText(`${tileNo[2]}`, 10, 80)
-  // @ts-expect-error
+
   return await createImageBitmap(offscreencanvas, { imageOrientation: 'flipY' })
 }

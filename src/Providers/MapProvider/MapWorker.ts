@@ -2,24 +2,17 @@ import { expose } from 'comlink'
 import { Fetch } from '../../Utils/Fetch'
 import { getTileBitmap } from './getTileBitmap'
 
-type MessageType = MessageEvent<{
-  id: string
-  tileNo: number[]
-  url: string
-  debug?: boolean
-  abort?: boolean
-}>
-
 const fetchingMap = new Map<string, Fetch>()
 
-export async function handleMap(args) {
+export async function getBitmap(args) {
   const { id, tileNo, url, debug, abort } = args
 
+  // Abort fetching
   if (abort) {
     fetchingMap.get(id)?.abort()
     fetchingMap.delete(id)
-    self.postMessage({ id, error: true })
-    return
+
+    return { id, error: true }
   }
 
   try {
@@ -37,6 +30,6 @@ export async function handleMap(args) {
   }
 }
 
-export type MapWorker = typeof handleMap
+export type MapWorker = typeof getBitmap
 
-expose(handleMap)
+expose(getBitmap)
