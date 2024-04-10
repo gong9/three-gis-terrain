@@ -31,10 +31,12 @@ class Tile extends Object3D {
 
   private async ready() {
     this.content = await this.map.provider.getTile(this.tileNo)
+
     if (this.isDisposed)
       return
 
     this.add(this.content)
+
     this.boundingBoxWorld.setFromObject(this.content).applyMatrix4(this.matrixWorld)
     this.map.add(this)
     this.visible = true
@@ -66,6 +68,7 @@ class Tile extends Object3D {
 
     let distance = this.boundingBoxWorld.distanceToPoint(cameraWorldPosition)
     const z = this.tileNo[2]
+
     distance /= 2 ** (this.map.provider.maxZoom - z)
 
     if (distance < 60)

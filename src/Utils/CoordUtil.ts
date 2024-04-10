@@ -3,9 +3,18 @@ export const MERC = 'merc'
 
 const R = 6378137
 const D2R = Math.PI / 180
+
 export function lonLatToWebMerctor(lon: number, lat: number) {
   const x = R * lon * D2R
   const y = R * Math.log(Math.tan(Math.PI * 0.25 + lat * D2R * 0.5))
+  return [x, y]
+}
+
+export const wgs842WebMercator = function (lon: number, lat: number) {
+  const x = (lon * 20037508.34) / 180
+  let y = Math.log(Math.tan(((90 + lat) * Math.PI) / 360)) / (Math.PI / 180)
+  y = (y * 20037508.34) / 180
+
   return [x, y]
 }
 
@@ -16,6 +25,7 @@ const ellipsoidsWgs84 = { a: 6378137, b: 6356752.314245, f: 1 / 298.257223563 }
 const mgrsLatBands = 'CDEFGHJKLMNPQRSTUVWXX' // X is repeated for 80-84°N
 const falseEasting = 500e3
 const falseNorthing = 10000e3
+
 // from https://github.com/chrisveness/geodesy/blob/761587cd748bd9f7c9825195eba4a9fc5891b859/utm.js#L272
 export function lonLatToUtm(lon: number, lat: number, zoneOverride?: number) {
   // if (!(lat >= -80 && lat <= 84))

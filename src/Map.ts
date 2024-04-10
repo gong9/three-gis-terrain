@@ -10,7 +10,7 @@ import { Tile } from './Tile'
 class Map extends Object3D {
   provider: Provider<Object3D>
   bbox = [74.390592, 6.900905, 134.071423, 54.318199]
-  maxZoom = 20
+  maxZoom = 15
   rootForward = 0
   camera: Camera
 
@@ -24,6 +24,9 @@ class Map extends Object3D {
   rootTiles: Tile[] = []
   lastUpdateTime = 0
 
+  /**
+   * initRootTiles
+   */
   private initRootTiles() {
     if (this.rootForward > 3) {
       console.warn('rootForward needs to be 0 - 3.')
@@ -33,9 +36,12 @@ class Map extends Object3D {
       console.warn('rootForward needs to be 0 - 3.')
       this.rootForward = 0
     }
+
     const rootTileNos = []
+
     let tileNos = [bboxToTile(this.bbox)]
     let rootForward = this.rootForward
+
     while (rootForward > 0) {
       const tileNosCopy = [...tileNos]
       tileNos = []
@@ -45,6 +51,7 @@ class Map extends Object3D {
       })
       rootForward--
     }
+
     rootTileNos.push(...tileNos)
 
     rootTileNos.forEach((no) => {
@@ -59,6 +66,7 @@ class Map extends Object3D {
       return
 
     const now = Date.now()
+
     if (now - this.lastUpdateTime < 300)
       return
 
@@ -68,6 +76,7 @@ class Map extends Object3D {
     }
 
     this.camera.getWorldPosition(this.cameraWorldPosition)
+
     this.cameraProjectionMatrix.multiplyMatrices(this.camera.projectionMatrix,
       this.camera.matrixWorldInverse)
 
@@ -83,11 +92,9 @@ class Map extends Object3D {
   }
 
   dispose() {
-    throw new Error('[Map.dispose] Method not implemented.')
   }
 
   regenerate() {
-    throw new Error('[Map.regenerate] Method not implemented.')
   }
 }
 

@@ -3,8 +3,6 @@ import { Box3Helper, MeshBasicMaterial, MeshStandardMaterial } from 'three'
 import type { Provider } from '../Provider'
 import { TerrainMesh } from './TerrainMesh'
 
-// import { Completer } from '../Utils/PromiseUtils';
-
 class TerrainMeshProvider implements Provider<Mesh> {
   constructor(
     public geometryProvider: Provider<BufferGeometry>,
@@ -22,17 +20,18 @@ class TerrainMeshProvider implements Provider<Mesh> {
       this.geometryProvider.getTile(tileNo),
       this.textureProvider.getTile(tileNo),
     ]
-    const res = await Promise.all(tasks)
-    const geometry = res[0] as BufferGeometry
-    const texture = res[1] as Texture
+
+    const [geometry, texture] = (await Promise.all(tasks)) as [BufferGeometry, Texture]
+
     const { wireframe, flatShading } = this
+
     const material = this.useStandardMaterial
       ? new MeshStandardMaterial({ map: texture, wireframe, flatShading })
       : new MeshBasicMaterial({ map: texture, wireframe })
+
     const mesh = new TerrainMesh()
 
     geometry.computeBoundingBox()
-
     geometry.boundingBox!.getCenter(mesh.center)
     geometry.center()
     geometry.computeBoundingSphere()
