@@ -3,17 +3,36 @@ import { Box3Helper, MeshBasicMaterial, MeshStandardMaterial } from '@anov/3d-co
 import type { Provider } from '../Provider'
 import { TerrainMesh } from './TerrainMesh'
 
-class TerrainMeshProvider implements Provider<Mesh> {
-  constructor(
-    public geometryProvider: Provider<BufferGeometry>,
-    public textureProvider: Provider<Texture>,
-  ) { }
+type TerrainMeshProviderOption = {
+  geometryProvider: Provider<BufferGeometry>
+  materialProvider: Provider<Texture>
 
-  maxZoom = 20
+  showBoundingBox?: boolean
+  wireframe?: boolean
+  flatShading?: boolean
+  maxZoom?: number
+}
+
+class TerrainMeshProvider implements Provider<Mesh> {
+  geometryProvider: Provider<BufferGeometry>
+  textureProvider: Provider<Texture>
+
+  maxZoom = 15
   showBoundingBox = false
   wireframe = false
   flatShading = false
   useStandardMaterial = false
+
+  constructor(option: TerrainMeshProviderOption) {
+    const { geometryProvider, materialProvider, showBoundingBox = false, wireframe = false, flatShading = false, maxZoom = 15 } = option
+
+    this.geometryProvider = geometryProvider
+    this.textureProvider = materialProvider
+    this.showBoundingBox = showBoundingBox
+    this.wireframe = wireframe
+    this.flatShading = flatShading
+    this.maxZoom = maxZoom
+  }
 
   async getTile(tileNo: number[]): Promise<Mesh> {
     const tasks = [

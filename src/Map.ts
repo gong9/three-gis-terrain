@@ -4,12 +4,16 @@ import { bboxToTile, getChildren } from '@mapbox/tilebelt'
 import type { Provider } from './Providers/Provider'
 import { Tile } from './Tile'
 
-/**
- * 地图对象
- */
+type MapOption = {
+  provider: Provider<Object3D>
+  bbox?: [number, number, number, number]
+  maxZoom?: number
+  camera: Camera
+}
+
 class Map extends Object3D {
   provider: Provider<Object3D>
-  bbox = [74.390592, 6.900905, 134.071423, 54.318199]
+  bbox = [104.955976, 20.149765, 120.998419, 30.528687]
   maxZoom = 15
   rootForward = 0
   camera: Camera
@@ -23,6 +27,17 @@ class Map extends Object3D {
 
   rootTiles: Tile[] = []
   lastUpdateTime = 0
+
+  constructor(option: MapOption) {
+    super()
+
+    const { provider, camera, bbox = [104.955976, 20.149765, 120.998419, 30.528687], maxZoom = 15 } = option || {}
+
+    this.provider = provider
+    this.bbox = bbox
+    this.maxZoom = maxZoom
+    this.camera = camera
+  }
 
   /**
    * initRootTiles

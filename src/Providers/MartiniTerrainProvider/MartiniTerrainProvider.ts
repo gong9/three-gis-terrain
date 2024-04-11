@@ -6,21 +6,31 @@ import { getGeometryData } from './MartiniWorker'
 
 type MartiniTerrainProviderOption = {
   worker?: Worker
+  maxZoom?: number
+  tileSource?: string
 }
 
 class MartiniTerrainProvider implements Provider<BufferGeometry> {
   maxZoom = 12
   coordType = UTM
   utmZone = 50
+
   private worker?: any
 
   source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=ISjP5ZD1yxlWIX2zMEyK'
 
   constructor(option?: MartiniTerrainProviderOption) {
-    const { worker } = option || {}
+    const {
+      worker,
+      maxZoom = 12,
+      tileSource = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=ISjP5ZD1yxlWIX2zMEyK',
+    } = option || {}
 
     if (worker)
       this.worker = wrap<any>(worker)
+
+    this.maxZoom = maxZoom
+    this.source = tileSource
   }
 
   async getTile(tileNo: number[]): Promise<BufferGeometry> {

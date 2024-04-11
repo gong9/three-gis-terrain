@@ -6,21 +6,33 @@ import { getTileBitmap } from './getTileBitmap'
 
 type MapProviderOption = {
   worker?: Worker
+  maxZoom?: number
+  showTileNo?: boolean
+  mapSource?: string
 }
 
 class MapProvider implements Provider<Texture> {
-  maxZoom = 20
-  source = 'https://gac-geo.googlecnapps.cn/maps/vt?lyrs=s&x=[x]&y=[y]&z=[z]'
+  maxZoom = 12
+  source = ''
   showTileNo = false
   private worker?: any
 
   fetching = new Map<number[], Fetch>()
 
   constructor(option?: MapProviderOption) {
-    const { worker } = option || {}
+    const {
+      worker,
+      maxZoom = 12,
+      showTileNo = false,
+      mapSource = 'https://webst01.is.autonavi.com/appmaptile?style=6&x=[x]&y=[y]&z=[z]',
+    } = option || {}
 
     if (worker)
       this.worker = wrap<any>(worker)
+
+    this.maxZoom = maxZoom
+    this.showTileNo = showTileNo
+    this.source = mapSource
   }
 
   async getTile(tileNo: number[]): Promise<Texture> {

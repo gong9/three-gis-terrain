@@ -1,7 +1,5 @@
 import { SceneControl, Vector3, lib, use } from '@anov/3d-core'
-import { Map, MapProvider, MartiniTerrainProvider, PlaneProvider, TerrainMeshProvider } from '../src/index'
-import { lonLatToUtm } from '../src/Utils/CoordUtil'
-import { wgs84toUtm } from '../src/Utils/index'
+import { MapMaterialProvider, Terrain, TerrainGeometryProvider, TerrainMesh } from '../src/index'
 
 // @ts-ignore
 import MapWorker from './worker/mapWorker?worker'
@@ -10,9 +8,6 @@ import MapWorker from './worker/mapWorker?worker'
 import MartiniWorker from './worker/martiniWorker?worker'
 
 const { MapControls } = lib
-
-console.log(lonLatToUtm(39.9087, 116.3975))
-console.log(wgs84toUtm(39.9087, 116.3975))
 
 const sceneControl = new SceneControl({
   orbitControls: {
@@ -34,30 +29,23 @@ sceneControl.ambientLight!.intensity = 20
 const controls = new MapControls(sceneControl.camera! as any, sceneControl.renderer!.domElement)
 controls!.target.set(585075.6602025257, 2946958.9453822337, 10)
 
-const planProvider = new PlaneProvider()
-
-const martiniProvider = new MartiniTerrainProvider({
+const martiniProvider = new TerrainGeometryProvider({
   worker: new MartiniWorker(),
 })
-martiniProvider.source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=ISjP5ZD1yxlWIX2zMEyK'
-
-const mapProvider = new MapProvider({
+const mapProvider = new MapMaterialProvider({
   worker: new MapWorker(),
 })
-mapProvider.source = 'https://webst01.is.autonavi.com/appmaptile?style=6&x=[x]&y=[y]&z=[z]'
-mapProvider.showTileNo = false
 
-const meshProvider = new TerrainMeshProvider(martiniProvider, mapProvider)
-meshProvider.showBoundingBox = false
-meshProvider.wireframe = false
-meshProvider.flatShading = false
+const meshProvider = new TerrainMesh({
+  geometryProvider: martiniProvider,
+  materialProvider: mapProvider,
+})
 
-const map = new Map()
+const map = new Terrain({
+  provider: meshProvider,
+  camera: sceneControl.camera!,
+})
 
-map.provider = meshProvider
-map.bbox = [104.955976, 20.149765, 120.998419, 30.528687]
-map.maxZoom = 15
-map.camera = sceneControl.camera!
 sceneControl.add(map)
 
 use.useframe(() => {
