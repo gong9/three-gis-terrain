@@ -30,30 +30,35 @@ class Tile extends Object3D {
   }
 
   private async ready() {
-    this.content = await this.map.provider.getTile(this.tileNo)
+    try {
+      this.content = await this.map.provider.getTile(this.tileNo)
 
-    if (this.isDisposed)
-      return
+      if (this.isDisposed)
+        return
 
-    this.add(this.content)
+      this.add(this.content)
 
-    this.boundingBoxWorld.setFromObject(this.content).applyMatrix4(this.matrixWorld)
-    this.map.add(this)
-    this.visible = true
-    this.isReady = true
+      this.boundingBoxWorld.setFromObject(this.content).applyMatrix4(this.matrixWorld)
+      this.map.add(this)
+      this.visible = true
+      this.isReady = true
 
-    if (this.parentTile) {
-      const siblings = this.parentTile.childrenTiles
-      let readyCount = 0
-      for (let i = 0; i < siblings.length; i++) {
-        if (siblings[i].isReady)
-          readyCount++
+      if (this.parentTile) {
+        const siblings = this.parentTile.childrenTiles
+        let readyCount = 0
+        for (let i = 0; i < siblings.length; i++) {
+          if (siblings[i].isReady)
+            readyCount++
+        }
+        if (readyCount === 4)
+          this.parentTile.visible = false
       }
-      if (readyCount === 4)
-        this.parentTile.visible = false
-    }
 
-    this.update()
+      this.update()
+    }
+    catch (error) {
+
+    }
   }
 
   update() {

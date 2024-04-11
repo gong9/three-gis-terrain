@@ -4,10 +4,10 @@ import { lonLatToUtm } from '../src/Utils/CoordUtil'
 import { wgs84toUtm } from '../src/Utils/index'
 
 // @ts-ignore
-import MapWorker from '../src/Providers/MapProvider/MapWorker?worker'
+import MapWorker from './worker/mapWorker?worker'
 
 // @ts-ignore
-import MartiniWorker from '../src/Providers/MartiniTerrainProvider/MartiniWorker?worker'
+import MartiniWorker from './worker/martiniWorker?worker'
 
 const { MapControls } = lib
 

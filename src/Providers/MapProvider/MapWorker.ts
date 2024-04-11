@@ -33,4 +33,4 @@ export async function getBitmap(args) {
 
 export type MapWorker = typeof getBitmap
 
-expose(getBitmap)
+export const createMapWorker = () => expose(getBitmap)

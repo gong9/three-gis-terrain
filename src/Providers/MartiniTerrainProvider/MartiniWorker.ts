@@ -25,4 +25,4 @@ export async function getGeometryData(args: any) {
   }
 }
 
-expose(getGeometryData)
+export const createMartiniTerrainWorker = () => expose(getGeometryData)
