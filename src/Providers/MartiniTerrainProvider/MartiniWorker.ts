@@ -1,7 +1,7 @@
 import { expose } from 'comlink'
 import { MartiniTileUtil } from './MartiniTileUtil'
 
-async function getGeometryData(args) {
+export async function getGeometryData(args: any) {
   const { id, tileNo, maxZ, url, coordType, utmZone, abort, dispose } = args
 
   if (abort) {

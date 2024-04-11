@@ -3,39 +3,33 @@ import { wrap } from 'comlink'
 import type { Provider } from '../Provider'
 import { Fetch } from '../../Utils/Fetch'
 import { getTileBitmap } from './getTileBitmap'
-import MapWorker from './MapWorker?worker'
+
+type MapProviderOption = {
+  worker?: Worker
+}
 
 class MapProvider implements Provider<Texture> {
   maxZoom = 20
   source = 'https://gac-geo.googlecnapps.cn/maps/vt?lyrs=s&x=[x]&y=[y]&z=[z]'
   showTileNo = false
-  private _useWorker = false
-  private _worker?: any
+  private worker?: any
 
   fetching = new Map<number[], Fetch>()
 
-  set useWorker(use: boolean) {
-    this._useWorker = use
-    if (!this._useWorker)
-      this._worker = undefined
-  }
+  constructor(option?: MapProviderOption) {
+    const { worker } = option || {}
 
-  get useWorker() {
-    return this._useWorker
+    if (worker)
+      this.worker = wrap<any>(worker)
   }
-
-  constructor() { }
 
   async getTile(tileNo: number[]): Promise<Texture> {
     const url = this.getUrl(tileNo)
     const texture = new Texture()
 
-    if (this._useWorker) {
-      if (!this._worker)
-        this._worker = wrap<any>(new MapWorker())
-
+    if (this.worker) {
       const id = this.getId(tileNo)
-      const data = await this._worker({ id, tileNo, url, debug: this.showTileNo })
+      const data = await this.worker({ id, tileNo, url, debug: this.showTileNo })
 
       texture.image = data!.bitmap as ImageBitmap
     }
@@ -56,7 +50,7 @@ class MapProvider implements Provider<Texture> {
   }
 
   async abort(tileNo: number[]) {
-    if (!this._useWorker) {
+    if (!this.worker) {
       const fetch = this.fetching.get(tileNo)
       if (fetch)
         fetch.abort()
@@ -64,7 +58,7 @@ class MapProvider implements Provider<Texture> {
       this.fetching.delete(tileNo)
     }
     else {
-      await this._worker({ id: this.getId(tileNo), abort: true })
+      await this.worker({ id: this.getId(tileNo), abort: true })
     }
   }
 

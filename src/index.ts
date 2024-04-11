@@ -1,11 +1,13 @@
-export * from './Map'
-export * from './Tile'
-export * from './Utils/Fetch'
-export * from './Providers/Provider'
-export * from './Providers/MapProvider/MapProvider'
-export * from './Providers/PlaneProvider/PlaneProvider'
-export * from './Providers/MartiniTerrainProvider/MartiniTerrainProvider'
-export * from './Providers/TerrainMeshProvider/TerrainMeshProvider'
-export * from './Utils/CoordUtil'
-export * from './Utils/WorkerUtil'
-export * from './Utils/TerrainUtil'
+import { PlaneProvider } from './Providers/PlaneProvider/PlaneProvider'
+import { MartiniTerrainProvider } from './Providers/MartiniTerrainProvider/MartiniTerrainProvider'
+import { MapProvider } from './Providers/MapProvider/MapProvider'
+import { TerrainMeshProvider } from './Providers/TerrainMeshProvider/TerrainMeshProvider'
+import { Map } from './Map'
+
+export {
+  PlaneProvider,
+  MartiniTerrainProvider,
+  MapProvider,
+  TerrainMeshProvider,
+  Map,
+}

@@ -10,7 +10,22 @@ export default defineConfig({
       formats: ['es'],
     },
     sourcemap: true,
+    rollupOptions: {
+      input: {
+        index: 'src/index.ts',
+        mapWorker: 'src/Providers/MapProvider/MapWorker.ts',
+        martiniWorker: 'src/Providers/MartiniTerrainProvider/MartiniWorker.ts',
+      },
+      output: {
+        entryFileNames: (chunkInfo) => {
+          if (chunkInfo.name.includes('Worker'))
+            return 'workers/[name].js'
+
+          return '[name].js'
+        },
+      },
+    },
   },
 
-  plugins: [dts({ rollupTypes: true, entryRoot: 'src', outputDir: 'dist/types', include: ['src'], exclude: ['src/Providers/MapProvider/MapWorker.ts', 'src/Providers/MartiniTerrainProvider/MartiniWorker.ts'] })],
+  plugins: [dts({ rollupTypes: true, entryRoot: 'src', outputDir: 'dist/types', include: ['src'] })],
 })

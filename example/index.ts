@@ -3,6 +3,12 @@ import { Map, MapProvider, MartiniTerrainProvider, PlaneProvider, TerrainMeshPro
 import { lonLatToUtm } from '../src/Utils/CoordUtil'
 import { wgs84toUtm } from '../src/Utils/index'
 
+// @ts-ignore
+import MapWorker from '../src/Providers/MapProvider/MapWorker?worker'
+
+// @ts-ignore
+import MartiniWorker from '../src/Providers/MartiniTerrainProvider/MartiniWorker?worker'
+
 const { MapControls } = lib
 
 console.log(lonLatToUtm(39.9087, 116.3975))
@@ -30,14 +36,16 @@ controls!.target.set(585075.6602025257, 2946958.9453822337, 10)
 
 const planProvider = new PlaneProvider()
 
-const martiniProvider = new MartiniTerrainProvider()
+const martiniProvider = new MartiniTerrainProvider({
+  worker: new MartiniWorker(),
+})
 martiniProvider.source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=ISjP5ZD1yxlWIX2zMEyK'
-martiniProvider.useWorker = true
 
-const mapProvider = new MapProvider()
+const mapProvider = new MapProvider({
+  worker: new MapWorker(),
+})
 mapProvider.source = 'https://webst01.is.autonavi.com/appmaptile?style=6&x=[x]&y=[y]&z=[z]'
 mapProvider.showTileNo = false
-mapProvider.useWorker = true
 
 const meshProvider = new TerrainMeshProvider(martiniProvider, mapProvider)
 meshProvider.showBoundingBox = false

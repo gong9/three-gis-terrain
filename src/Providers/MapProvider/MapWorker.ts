@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { expose } from 'comlink'
 import { Fetch } from '../../Utils/Fetch'
 import { getTileBitmap } from './getTileBitmap'

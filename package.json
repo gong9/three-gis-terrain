@@ -1,7 +1,7 @@
 {
   "name": "threejs-terrain",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "three gis 地形",
   "files": [
     "dist",
@@ -18,6 +18,9 @@
     "terrain",
     "gis"
   ],
+  "exports":{
+    "./workers": "./dist/workers/*"
+  },
   "scripts": {
     "dev": "vite --config vite.dev.config.ts",
     "build": "vite build",
