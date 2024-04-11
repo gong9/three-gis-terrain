@@ -92,7 +92,7 @@ btn1.on('click', () => {
 })
 
 btn2.on('click', () => {
-  mapProvider.source = 'http://wprd04.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x=[x]&y=[y]&z=[z]'
+  mapProvider.source = 'https://wprd04.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x=[x]&y=[y]&z=[z]'
   meshProvider.geometryProvider = planeGeometryProvider
   map.regenerate()
 })
