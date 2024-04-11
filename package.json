@@ -1,12 +1,15 @@
 {
   "name": "threejs-terrain",
   "type": "module",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "three gis 地形",
   "files": [
     "dist",
     "README.md"
   ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "license": "MIT",
   "keywords": [
     "3d",

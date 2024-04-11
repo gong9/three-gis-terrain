@@ -1,5 +1,5 @@
 import { SceneControl, Vector3, lib, use } from '@anov/3d-core'
-import { Map, MapProvider, MartiniTerrainProvider, PlaneProvider, TerrainMeshProvider, UTM } from '../src/index'
+import { Map, MapProvider, MartiniTerrainProvider, PlaneProvider, TerrainMeshProvider } from '../src/index'
 import { lonLatToUtm } from '../src/Utils/CoordUtil'
 import { wgs84toUtm } from '../src/Utils/index'
 
@@ -29,11 +29,9 @@ const controls = new MapControls(sceneControl.camera! as any, sceneControl.rende
 controls!.target.set(585075.6602025257, 2946958.9453822337, 10)
 
 const planProvider = new PlaneProvider()
-planProvider.coordType = UTM
 
 const martiniProvider = new MartiniTerrainProvider()
 martiniProvider.source = 'https://api.maptiler.com/tiles/terrain-rgb-v2/[z]/[x]/[y].webp?key=ISjP5ZD1yxlWIX2zMEyK'
-martiniProvider.coordType = UTM
 martiniProvider.useWorker = true
 
 const mapProvider = new MapProvider()
