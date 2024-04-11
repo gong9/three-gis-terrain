@@ -107,9 +107,13 @@ class Map extends Object3D {
   }
 
   dispose() {
+    this.rootTiles.forEach(tile => tile.dispose())
+    this.rootTiles = []
   }
 
   regenerate() {
+    this.rootTiles.forEach(tile => tile.dispose())
+    this.rootTiles = []
   }
 }
 

@@ -6,7 +6,6 @@ import { getTileBitmap } from './getTileBitmap'
 
 type MapProviderOption = {
   worker?: Worker
-  maxZoom?: number
   showTileNo?: boolean
   mapSource?: string
 }
@@ -22,7 +21,6 @@ class MapProvider implements Provider<Texture> {
   constructor(option?: MapProviderOption) {
     const {
       worker,
-      maxZoom = 12,
       showTileNo = false,
       mapSource = 'https://webst01.is.autonavi.com/appmaptile?style=6&x=[x]&y=[y]&z=[z]',
     } = option || {}
@@ -30,7 +28,6 @@ class MapProvider implements Provider<Texture> {
     if (worker)
       this.worker = wrap<any>(worker)
 
-    this.maxZoom = maxZoom
     this.showTileNo = showTileNo
     this.source = mapSource
   }

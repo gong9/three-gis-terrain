@@ -76,10 +76,10 @@ class Tile extends Object3D {
 
     distance /= 2 ** (this.map.provider.maxZoom - z)
 
-    if (distance < 60)
+    if (distance < 1000)
       this.subdivide()
 
-    if (distance > 80)
+    if (distance > 1000)
       this.simplify()
 
     const sortedChildren = this.childrenTiles.sort((a, b) =>

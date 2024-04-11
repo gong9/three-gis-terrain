@@ -1,6 +1,8 @@
 # threejs-terrain
 
 
+> 示例： https://three-gis-terrain-pwag.vercel.app/example/index.html
+
 ## Usage
 
 ```bash

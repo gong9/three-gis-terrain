@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@anov/3d-core':
     specifier: ^0.0.4
@@ -19,6 +15,9 @@ devDependencies:
   '@antfu/eslint-config':
     specifier: ^0.38.5
     version: 0.38.5(eslint@8.23.0)(typescript@4.8.3)
+  '@tweakpane/core':
+    specifier: ^2.0.3
+    version: 2.0.3
   '@types/mapbox__tilebelt':
     specifier: ^1.0.0
     version: 1.0.0
@@ -28,6 +27,9 @@ devDependencies:
   eslint:
     specifier: ^8.23.0
     version: 8.23.0
+  tweakpane:
+    specifier: ^4.0.3
+    version: 4.0.3
   typescript:
     specifier: ^4.6.4
     version: 4.8.3
@@ -584,6 +586,10 @@ packages:
       minimatch: 5.1.0
       mkdirp: 1.0.4
       path-browserify: 1.0.1
+    dev: true
+
+  /@tweakpane/core@2.0.3:
+    resolution: {integrity: sha512-qHci4XA1Wngpwy8IzsLh5JEdscz8aDti/9YhyOaq01si+cgNDaZfwzTtXdn1+xTxSnCM+pW4Zb2/4eqn+K1ATw==}
     dev: true
 
   /@tweenjs/tween.js@18.6.4:
@@ -3141,6 +3147,10 @@ packages:
       typescript: 4.8.3
     dev: true
 
+  /tweakpane@4.0.3:
+    resolution: {integrity: sha512-BlcWOAe8oe4c+k9pmLBARGdWB6MVZMszayekkixQXTgkxTaYoTUpHpwVEp+3HkoamZkomodpbBf0CkguIHTgLg==}
+    dev: true
+
   /type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -3413,3 +3423,7 @@ packages:
     optionalDependencies:
       commander: 2.20.3
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

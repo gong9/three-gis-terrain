@@ -9,6 +9,8 @@
     "no-sequences": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "max-statements-per-line":"off",
-    "@typescript-eslint/prefer-ts-expect-error":"off"
+    "@typescript-eslint/prefer-ts-expect-error":"off",
+    "import/order":"off",
+    "unused-imports/no-unused-imports":"off"
   }
 }
