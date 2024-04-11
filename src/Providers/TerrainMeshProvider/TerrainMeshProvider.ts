@@ -1,5 +1,5 @@
-import type { BufferGeometry, Mesh, Texture } from 'three'
-import { Box3Helper, MeshBasicMaterial, MeshStandardMaterial } from 'three'
+import type { BufferGeometry, Mesh, Texture } from '@anov/3d-core'
+import { Box3Helper, MeshBasicMaterial, MeshStandardMaterial } from '@anov/3d-core'
 import type { Provider } from '../Provider'
 import { TerrainMesh } from './TerrainMesh'
 

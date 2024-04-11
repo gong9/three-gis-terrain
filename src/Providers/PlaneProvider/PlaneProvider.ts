@@ -1,5 +1,5 @@
-import type { BufferGeometry } from 'three'
-import { BufferAttribute, PlaneGeometry } from 'three'
+import type { BufferGeometry } from '@anov/3d-core'
+import { BufferAttribute, PlaneGeometry } from '@anov/3d-core'
 import { tileToBBOX } from '@mapbox/tilebelt'
 import type { Provider } from '../Provider'
 import { MERC, UTM, lonLatToUtm, lonLatToWebMerctor } from '../../Utils/CoordUtil'

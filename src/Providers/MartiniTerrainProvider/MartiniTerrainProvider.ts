@@ -1,4 +1,4 @@
-import { BufferAttribute, BufferGeometry } from 'three'
+import { BufferAttribute, BufferGeometry } from '@anov/3d-core'
 import { wrap } from 'comlink'
 import { UTM } from '../../Utils/CoordUtil'
 import type { Provider } from '../Provider'

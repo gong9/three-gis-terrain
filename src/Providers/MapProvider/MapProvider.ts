@@ -1,4 +1,4 @@
-import { Texture } from 'three'
+import { Texture } from '@anov/3d-core'
 import { wrap } from 'comlink'
 import type { Provider } from '../Provider'
 import { Fetch } from '../../Utils/Fetch'

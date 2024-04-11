@@ -1,5 +1,5 @@
-import type { Camera } from 'three'
-import { Frustum, Matrix4, Object3D, Vector3 } from 'three'
+import type { Camera } from '@anov/3d-core'
+import { Frustum, Matrix4, Object3D, Vector3 } from '@anov/3d-core'
 import { bboxToTile, getChildren } from '@mapbox/tilebelt'
 import type { Provider } from './Providers/Provider'
 import { Tile } from './Tile'

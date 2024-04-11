@@ -1,5 +1,5 @@
 import { getChildren } from '@mapbox/tilebelt'
-import { Box3, Object3D } from 'three'
+import { Box3, Object3D } from '@anov/3d-core'
 import type { Map } from './Map'
 
 class Tile extends Object3D {

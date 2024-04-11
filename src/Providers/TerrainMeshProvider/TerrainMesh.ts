@@ -1,5 +1,5 @@
-import type { BufferGeometry } from 'three'
-import { Mesh, Vector3 } from 'three'
+import type { BufferGeometry } from '@anov/3d-core'
+import { Mesh, Vector3 } from '@anov/3d-core'
 
 class TerrainMesh extends Mesh {
   center = new Vector3()
