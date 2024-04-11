@@ -74,7 +74,7 @@ use.useframe(() => {
 mapWorker?worker.ts
 
 ```ts
-import { createMapWorker } from '../../src/index'
+import { createMapWorker } from 'threejs-terrain'
 
 createMapWorker()
 ```
@@ -83,7 +83,7 @@ createMapWorker()
 martiniWorker?worker
 
 ```ts
-import { createMartiniTerrainWorker } from '../../src/index'
+import { createMartiniTerrainWorker } from 'threejs-terrain'
 
 createMartiniTerrainWorker()
 ```

@@ -1,7 +1,7 @@
 {
   "name": "threejs-terrain",
   "type": "module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "three gis 地形",
   "files": [
     "dist",
