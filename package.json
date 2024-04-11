@@ -24,6 +24,7 @@
   "scripts": {
     "dev": "vite --config vite.dev.config.ts",
     "build": "vite build",
+    "build-doc":"vite build --config vite.dev.config.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
