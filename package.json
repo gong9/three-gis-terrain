@@ -1,26 +1,33 @@
 {
-  "name": "satellite-map",
+  "name": "threejs-terrain",
   "type": "module",
   "version": "1.0.0",
-  "private": true,
   "description": "",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "3d",
+    "webgl",
+    "threejs",
+    "terrain",
+    "gis"
+  ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.dev.config.ts",
     "build": "vite build",
-    "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
-  "peerDependencies": {
-    "@here/quantized-mesh-decoder": "^1.2.8",
+  "dependencies": {
+    "comlink": "^4.4.1",
     "@mapbox/tilebelt": "^1.0.2",
     "three": "^0.144.0",
     "three-bvh-csg": "^0.0.5",
     "three-mesh-bvh": "^0.5.23",
     "tilebelt-wgs84": "^1.0.4"
-  },
-  "dependencies": {
-    "comlink": "^4.4.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.5",

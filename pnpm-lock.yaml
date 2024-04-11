@@ -1,9 +1,10 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
-  '@here/quantized-mesh-decoder':
-    specifier: ^1.2.8
-    version: 1.2.8
   '@mapbox/tilebelt':
     specifier: ^1.0.2
     version: 1.0.2
@@ -434,10 +435,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /@here/quantized-mesh-decoder@1.2.8:
-    resolution: {integrity: sha512-fYOgpANVVMT38cHlCAIqzUun0cvhWGjpTI+jCbFtdfWgE24+sHtoCqPFvue6UhC9LA64j//lrdMKtryUvskqiA==}
-    dev: false
 
   /@humanwhocodes/config-array@0.10.7:
     resolution: {integrity: sha512-MDl6D6sBsaV452/QSdX+4CXIjZhIcI0PELsxUjk4U828yd58vk3bTIvk/6w5FY+4hIy9sLW0sfrV7K7Kc++j/w==}

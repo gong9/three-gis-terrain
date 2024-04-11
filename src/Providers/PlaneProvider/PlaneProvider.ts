@@ -19,6 +19,7 @@ class PlaneProvider implements Provider<BufferGeometry> {
     const rt = this.convertCoordinate(bbox[2], bbox[3])
     const lb = this.convertCoordinate(bbox[0], bbox[1])
     const rb = this.convertCoordinate(bbox[2], bbox[1])
+
     const vertex = new Float32Array([
       lt[0], lt[1], 0,
       rt[0], rt[1], 0,
