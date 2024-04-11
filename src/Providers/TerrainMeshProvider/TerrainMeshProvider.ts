@@ -1,5 +1,5 @@
 import type { BufferGeometry, Mesh, Texture } from '@anov/3d-core'
-import { Box3Helper, MeshBasicMaterial, MeshStandardMaterial } from '@anov/3d-core'
+import { Box3Helper, MeshBasicMaterial, MeshStandardMaterial, Vector3 } from '@anov/3d-core'
 import type { Provider } from '../Provider'
 import { TerrainMesh } from './TerrainMesh'
 
@@ -11,6 +11,7 @@ type TerrainMeshProviderOption = {
   wireframe?: boolean
   flatShading?: boolean
   maxZoom?: number
+  offset?: Vector3
 }
 
 class TerrainMeshProvider implements Provider<Mesh> {
@@ -22,9 +23,10 @@ class TerrainMeshProvider implements Provider<Mesh> {
   wireframe = false
   flatShading = false
   useStandardMaterial = false
+  offset: Vector3 = new Vector3()
 
   constructor(option: TerrainMeshProviderOption) {
-    const { geometryProvider, materialProvider, showBoundingBox = false, wireframe = false, flatShading = false, maxZoom = 15 } = option
+    const { geometryProvider, materialProvider, offset = new Vector3(), showBoundingBox = false, wireframe = false, flatShading = false, maxZoom = 15 } = option
 
     this.geometryProvider = geometryProvider
     this.textureProvider = materialProvider
@@ -32,6 +34,7 @@ class TerrainMeshProvider implements Provider<Mesh> {
     this.wireframe = wireframe
     this.flatShading = flatShading
     this.maxZoom = maxZoom
+    this.offset = offset
   }
 
   async getTile(tileNo: number[]): Promise<Mesh> {
@@ -59,6 +62,8 @@ class TerrainMeshProvider implements Provider<Mesh> {
 
     mesh.geometry = geometry
     mesh.material = material
+
+    mesh.position.add(this.offset)
 
     if (this.showBoundingBox) {
       const boxHelper = new Box3Helper(geometry.boundingBox!)

@@ -1,5 +1,5 @@
 import type { BufferGeometry } from '@anov/3d-core'
-import { BufferAttribute, PlaneGeometry } from '@anov/3d-core'
+import { BufferAttribute, PlaneGeometry, Vector3 } from '@anov/3d-core'
 import { tileToBBOX } from '@mapbox/tilebelt'
 import type { Provider } from '../Provider'
 import { MERC, UTM, lonLatToUtm, lonLatToWebMerctor } from '../../Utils/CoordUtil'
@@ -7,8 +7,11 @@ import { MERC, UTM, lonLatToUtm, lonLatToWebMerctor } from '../../Utils/CoordUti
 class PlaneProvider implements Provider<BufferGeometry> {
   utmZone = 50
   coordType = UTM
+  offset: Vector3 = new Vector3()
 
-  constructor() { }
+  constructor() {
+
+  }
 
   maxZoom = 20
 
@@ -26,7 +29,9 @@ class PlaneProvider implements Provider<BufferGeometry> {
       lb[0], lb[1], 0,
       rb[0], rb[1], 0,
     ])
-    geometry.setAttribute('position', new BufferAttribute(vertex, 3))
+    geometry.setAttribute('position',
+      new BufferAttribute(vertex, 3))
+
     return geometry
   }
 
